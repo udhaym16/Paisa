@@ -17,6 +17,7 @@ namespace Paisa
         SqlConnection con = new SqlConnection();
         String userName;
         int productID = 0;
+        int updatedQuantity = 0;
         public AddProducts(String username)
         {
             InitializeComponent();
@@ -72,7 +73,8 @@ namespace Paisa
             {
                 if (productID != 0)
                 {
-                    String update = "UPDATE product SET product_name = '" + txtProductName.Text + "', category_id = " + getCategoryID(listCategory.Text) + ", product_quantity = " + txtQuantity.Text + ",product_price = " + txtProductPrice.Text + " WHERE product_id = " + productID + "";
+                    updatedQuantity = updatedQuantity + int.Parse(txtQuantity.Text);
+                    String update = "UPDATE product SET product_name = '" + txtProductName.Text + "', category_id = " + getCategoryID(listCategory.Text) + ", product_quantity = " + updatedQuantity + ",product_price = " + txtProductPrice.Text + " WHERE product_id = " + productID + "";
                     con.Open();
                     SqlCommand cmd = new SqlCommand(update, con);
                     cmd.ExecuteNonQuery();
@@ -176,6 +178,7 @@ namespace Paisa
                 txtProductName.Text = row.Cells["Product Name"].Value.ToString();
                 txtProductPrice.Text = row.Cells["Unit Price"].Value.ToString();
                 txtQuantity.Text = row.Cells["Quantity"].Value.ToString();
+                updatedQuantity = int.Parse(row.Cells["Quantity"].Value.ToString());
                 listCategory.SelectedItem = row.Cells["Category Name"].Value;
             }
             

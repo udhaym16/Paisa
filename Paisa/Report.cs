@@ -128,8 +128,8 @@ namespace Paisa
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            bitmap = new Bitmap(this.dataGridViewSales.Width, this.dataGridViewSales.Height);
-            dataGridViewSales.DrawToBitmap(bitmap, new Rectangle(0, 0, this.dataGridViewSales.Width, this.dataGridViewSales.Height));
+            bitmap = new Bitmap(this.dataGridViewSales.Width, this.dataGridViewSales.RowCount * dataGridViewSales.RowTemplate.Height);
+            dataGridViewSales.DrawToBitmap(bitmap, new Rectangle(0, 0, this.dataGridViewSales.Width, this.dataGridViewSales.RowCount * dataGridViewSales.RowTemplate.Height));
             printPreviewDialog1.Document = printDocument1;
             printPreviewDialog1.PrintPreviewControl.Zoom = 1;
             printPreviewDialog1.ShowDialog();
